@@ -1,0 +1,32 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  class="tw-grid tw-max-w-md tw-w-full tw-justify-self-center"
+>
+  @if (file(); as file) {
+  <p>Выбранный файл: {{ file.name }}</p>
+  }
+  <button
+    type="button"
+    class="tw-mb-2"
+    mat-stroked-button
+    (click)="fileInput.click()"
+  >
+    Выбрать файл
+  </button>
+  <input
+    hidden
+    #fileInput
+    (change)="onFileSelected($event)"
+    type="file"
+    id="file"
+    accept="image/*"
+  />
+
+  <mat-form-field>
+    <mat-label>Пароль</mat-label>
+    <input type="password" matInput formControlName="password" />
+  </mat-form-field>
+
+  <button mat-flat-button [disabled]="loading()">Загрузить</button>
+</form>

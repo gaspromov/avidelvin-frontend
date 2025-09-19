@@ -1,0 +1,12 @@
+
+.content {
+  @apply tw-grid tw-gap-5 tw-justify-self-center tw-w-full tw-max-w-5xl;
+}
+
+.image-block {
+  @apply tw-grid tw-grid-flow-col tw-gap-2.5 md:tw-gap-5;
+}
+
+avi-image {
+  @apply tw-h-[700px];
+}

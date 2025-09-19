@@ -7,6 +7,8 @@ import {
 import { NgOptimizedImage } from '@angular/common';
 
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideRouter } from '@angular/router';
+import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +16,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(),
     importProvidersFrom(NgOptimizedImage),
+    provideRouter(routes),
   ],
 };

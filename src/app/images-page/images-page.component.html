@@ -1,0 +1,15 @@
+@let imageBlocks = images();
+<div class="content">
+  @for (blockImages of imageBlocks; track $index ){
+  <div
+    class="image-block"
+    [class]="
+      blockImages.length === 1 ? 'image-block_alone' : 'image-block_dual'
+    "
+  >
+    @for (image of blockImages; track image) {
+    <avi-image [imgUrl]="image" />
+    }
+  </div>
+  }
+</div>

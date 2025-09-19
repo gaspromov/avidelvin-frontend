@@ -1,51 +1,25 @@
-import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { ImageComponent } from './components/image.component';
-import { toSignal } from '@angular/core/rxjs-interop';
-import { map } from 'rxjs';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'avi-root',
   standalone: true,
-  imports: [ImageComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss',
+  imports: [RouterOutlet, RouterLink],
+  template: `
+    <header class="tw-py-5">
+      <a routerLink="/">
+        <h1 class="title">AVI Photos</h1>
+      </a>
+    </header>
+    <router-outlet />
+  `,
+  styles: `
+    :host {
+      @apply tw-grid tw-gap-2 tw-px-5 tw-pb-20;
+    }
+    .title {
+      @apply tw-text-3xl tw-font-medium tw-text-center tw-text-black;
+    }
+  `,
 })
-export class AppComponent {
-  readonly images;
-
-  constructor(private http: HttpClient) {
-    this.images = toSignal(
-      this.http.get<string[]>('/images-data.json').pipe(
-        map((names) => names.map((name) => `/images/${name}`)),
-        map((urls) => {
-          const blocks: string[][] = [];
-
-          const isNextAlone = (
-            lastBlock?: string[],
-            prevLastBloack?: string[]
-          ) => lastBlock?.length === 2 && prevLastBloack?.length === 2;
-
-          urls.forEach((url) => {
-            const lastBlock = blocks.at(-1);
-
-            const prevLastBloack = blocks.at(-2);
-            const prevPrevLastBloack = blocks.at(-3);
-
-            if (
-              !lastBlock ||
-              lastBlock.length === 2 ||
-              isNextAlone(prevPrevLastBloack, prevLastBloack)
-            ) {
-              blocks.push([url]);
-            } else {
-              lastBlock.push(url);
-            }
-          });
-
-          return blocks;
-        })
-      )
-    );
-  }
-}
+export class AppComponent {}
