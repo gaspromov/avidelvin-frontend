@@ -44,7 +44,7 @@ export class UploadPageComponent {
     const file = this.file();
 
     if (!file) {
-      this.snBar.open('Выбери файл');
+      this.snBar.open('Выбери файл', undefined, { duration: 3000 });
     }
 
     if (!file || this.form.invalid) {
@@ -62,8 +62,10 @@ export class UploadPageComponent {
       })
       .pipe(finalize(() => this.loading.set(false)))
       .subscribe({
-        next: () => this.snBar.open('Файл создан'),
-        error: (e) => this.snBar.open(e.error.error),
+        next: () =>
+          this.snBar.open('Файл создан', undefined, { duration: 3000 }),
+        error: (e) =>
+          this.snBar.open(e.error.error, undefined, { duration: 3000 }),
       });
   }
 
