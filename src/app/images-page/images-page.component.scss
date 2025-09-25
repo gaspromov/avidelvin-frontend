@@ -1,4 +1,3 @@
-
 .content {
   @apply tw-grid tw-gap-5 tw-justify-self-center tw-w-full tw-max-w-5xl;
 }
@@ -8,5 +7,5 @@
 }
 
 avi-image {
-  @apply tw-h-[700px];
+  @apply md:tw-h-[700px] tw-h-52;
 }
